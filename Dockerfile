@@ -12,7 +12,6 @@ RUN apk --update --no-cache add ca-certificates \
     musl-dev \
     make \
     m4 \
-    wget \
     autoconf
 
 ARG PHP_VERSION=7.2
@@ -28,8 +27,10 @@ RUN apk add --no-cache --update \
     php7-dev@php
 
 # INSTALL XDEBUG
-COPY ./config/php/xdebug-2.6.1.tgz /tmp/
-RUN pecl install /tmp/xdebug-2.6.1.tgz
+COPY ./config/php/xdebug-2.6.1.tgz /tmp
+RUN cd /tmp
+RUN ls
+RUN pecl install xdebug-2.6.1.tgz
 
 ADD config/php/xdebug.ini /etc/php7/conf.d/xdebug.ini
 
