@@ -7,7 +7,6 @@ FROM nginx:mainline-alpine
 LABEL maintainer="Li Hao <dokak47@vip.qq.com>"
 
 # INSTALL SOME SYSTEM PACKAGES.
-COPY ./config/php/xdebug-2.6.1.tgz /tmp/
 
 RUN apk --update --no-cache add ca-certificates \
     bash \
@@ -71,7 +70,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php -r "unlink('composer-setup.php');"
 
 # INSTALL XDEBUG
-
+COPY ./config/php/xdebug-2.6.1.tgz /tmp/
 RUN pecl install /tmp/xdebug-2.6.1.tgz
 
 # ADD START SCRIPT, SUPERVISOR CONFIG, NGINX CONFIG AND RUN SCRIPTS.
